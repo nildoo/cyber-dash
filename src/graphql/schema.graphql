@@ -1,0 +1,532 @@
+mutation AddClient($input: AddClientInput!) {
+  addClient(input: $input) {
+    _id
+    name
+    consultant {
+      _id
+    }
+    email
+    cnpj
+    contractType {
+      type
+      title
+    }
+    address {
+      _id
+      zipcode
+      street
+      city
+      neighborhood
+      state
+      number
+      complement
+    }
+    phone
+    whatsapp
+    othersContracts {
+      _id
+      extra_art
+      extra_network
+      landing_page
+      site_development
+      site_maintenance
+    }
+  }
+}
+
+query Clients {
+  clients {
+    _id
+    name
+    email
+    contractType {
+      type
+      title
+    }
+    whatsapp
+    othersContracts {
+      extra_art
+      extra_network
+      landing_page
+      site_development
+      site_maintenance
+    }
+  }
+}
+
+query Client($clientId: String!) {
+  client(id: $clientId) {
+    _id
+    name
+    email
+    networks {
+      name
+      insights {
+        comments
+        commentsHistory {
+          date
+          quantity
+        }
+        followers
+        followersHistory {
+          date
+          quantity
+        }
+        likes
+        likesHistory {
+          date
+          quantity
+        }
+        reached
+        reachedHistory {
+          date
+          quantity
+        }
+        posts
+        postsHistory {
+          date
+          quantity
+        }
+        profileViews
+        profileViewsHistory {
+          date
+          quantity
+        }
+      }
+    }
+  }
+}
+
+query ClientByName($name: String!) {
+  clientByName(name: $name) {
+    _id
+    name
+  }
+}
+
+mutation AddNetwork($input: NetworkInput!) {
+  addNetwork(input: $input) {
+    _id
+    name
+    email
+    networks {
+      name
+      insights {
+        followers
+        likes
+        comments
+        reached
+        commentsHistory {
+          date
+          quantity
+        }
+        followersHistory {
+          date
+          quantity
+        }
+        likesHistory {
+          date
+          quantity
+        }
+        reachedHistory {
+          date
+          quantity
+        }
+      }
+    }
+  }
+}
+
+query Query($input: HistoryInput!) {
+  dataHistories(input: $input) {
+    networkType
+    week
+    year
+  }
+}
+
+mutation UdpateNetwork($input: NetworkInput!) {
+  udpateNetwork(input: $input) {
+    _id
+    name
+    email
+    networks {
+      name
+      lastUpdate
+      insights {
+        followers
+        likes
+        comments
+        reached
+        commentsHistory {
+          date
+          quantity
+        }
+        followersHistory {
+          date
+          quantity
+        }
+        likesHistory {
+          date
+          quantity
+        }
+        reachedHistory {
+          date
+          quantity
+        }
+      }
+    }
+  }
+}
+
+query GetCampaingsByClientMin($client: String!) {
+  getCampaingByClient(client: $client) {
+    _id
+    client {
+      name
+    }
+    title
+    type
+    socialMediasResults {
+      name
+    }
+  }
+}
+
+query ClientById($clientId: String!) {
+  client(id: $clientId) {
+    _id
+    name
+    networks {
+      name
+    }
+  }
+}
+
+query GetCampaingByIdMin($getCampaingByIdId: String!) {
+  getCampaingById(id: $getCampaingByIdId) {
+    _id
+    title
+    type
+    status
+    startDate
+    links {
+      _id
+      link
+      title
+    }
+    meet {
+      date
+      hour
+      title
+    }
+    endDate
+    socialMediasResults {
+      _id
+      name
+      adResults {
+        amountSpent
+        reach
+        costPerResults {
+          _id
+          title
+          value
+        }
+        results {
+          _id
+          title
+          value
+        }
+      }
+    }
+    files {
+      images {
+        _id
+        approved
+        size
+        folder
+        firebasePath
+        thumb
+        title
+        type
+        url
+      }
+      signature {
+        _id
+        approved
+        size
+        folder
+        firebasePath
+        thumb
+        title
+        type
+        url
+      }
+      videos {
+        _id
+        approved
+        size
+        thumb
+        title
+        folder
+        firebasePath
+        type
+        url
+      }
+    }
+  }
+}
+
+mutation AddFilesToCampaing($input: AddFileCampaingInput!) {
+  addFilesToCampaing(input: $input) {
+    files {
+      images {
+        _id
+        approved
+        size
+        thumb
+        title
+        type
+        url
+      }
+      signature {
+        _id
+        approved
+        size
+        thumb
+        title
+        type
+        url
+      }
+      videos {
+        _id
+        approved
+        size
+        thumb
+        title
+        type
+        url
+      }
+    }
+  }
+}
+
+mutation ApproveFile($input: ApproveFileInput!) {
+  approveFile(input: $input)
+}
+
+mutation SignIn($input: SignInInputMain!) {
+  signIn(input: $input) {
+    token
+    role
+  }
+}
+
+query ConsultantMe {
+  consultantMe {
+    _id
+    name
+    email
+    office
+  }
+}
+
+query CampaingById($getCampaingByIdId: String!) {
+  getCampaingById(id: $getCampaingByIdId) {
+    _id
+    client {
+      _id
+      name
+      email
+    }
+    consultant {
+      _id
+      name
+      email
+      office
+    }
+  }
+}
+
+query Consultants {
+  consultants {
+    _id
+    name
+    email
+    office
+  }
+}
+
+mutation AddConsultant($input: AddConsultantInput!) {
+  addConsultant(input: $input) {
+    _id
+    name
+    email
+    office
+    role
+  }
+}
+
+query ClientAllDetails($clientId: String!) {
+  client(id: $clientId) {
+    _id
+    name
+    email
+    cnpj
+    contractType {
+      title
+      type
+    }
+    address {
+      city
+      complement
+      neighborhood
+      number
+      state
+      street
+      zipcode
+    }
+    phone
+    whatsapp
+    othersContracts {
+      extra_art
+      extra_network
+      landing_page
+      site_development
+      site_maintenance
+    }
+  }
+}
+
+mutation UpdateClient($input: UpdateClientInput!) {
+  updateClient(input: $input) {
+    _id
+    name
+    email
+    cnpj
+    contractType {
+      title
+      type
+    }
+    address {
+      city
+      complement
+      neighborhood
+      number
+      state
+      street
+      zipcode
+    }
+    phone
+    whatsapp
+    othersContracts {
+      extra_art
+      extra_network
+      landing_page
+      site_development
+      site_maintenance
+    }
+  }
+}
+
+query GetMe {
+  getMe {
+    id
+    name
+    email
+    office
+    role
+  }
+}
+
+mutation AddCampaing($input: AddCampaingInput!) {
+  addCampaing(input: $input) {
+    _id
+  }
+}
+
+mutation AddLink($input: AddLinkInput!) {
+  addLink(input: $input) {
+    _id
+    title
+    links {
+      link
+      title
+    }
+  }
+}
+
+mutation RemoveLink($input: RemoveLinkInput!) {
+  removeLink(input: $input)
+}
+
+mutation AddMeet($input: AddMeetInput!) {
+  addMeet(input: $input) {
+    meet {
+      date
+      hour
+      title
+    }
+  }
+}
+
+mutation AddResultsCampaing($input: AddResultsCampaingInput!) {
+  addResultsCampaing(input: $input)
+}
+
+query ClientByNameFiltered($name: String!) {
+  clientByName(name: $name) {
+    _id
+    name
+    email
+    whatsapp
+    contractType {
+      title
+      type
+    }
+    othersContracts {
+      _id
+      extra_art
+      extra_network
+      landing_page
+      site_development
+      site_maintenance
+    }
+  }
+}
+
+query Consultant($consultantId: String!) {
+  consultant(id: $consultantId) {
+    _id
+    name
+    email
+    office
+    role
+  }
+}
+
+mutation UdpatePassword($input: UpdatePasswordInput!) {
+  udpatePassword(input: $input) {
+    _id
+    name
+    email
+    office
+    role
+  }
+}
+
+mutation SendNotificationToClient($input: AddNotificationInput!) {
+  sendNotificationToClient(input: $input)
+}
+
+query GetTotalClients {
+  totalClients
+}
+
+query GetTotalCampaings {
+  totalCampaings
+}
+
+mutation RemoveFileFromCampaing($input: RemoveImageCampaingInput!) {
+  removeFileFromCampaing(input: $input)
+}
